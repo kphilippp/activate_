@@ -1,13 +1,15 @@
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
 import {
-  SafeAreaView,
   Text,
   TextInput,
   TouchableWithoutFeedback,
   View,
   Image,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from "react-native";
 
 import { router } from "expo-router";
@@ -18,6 +20,7 @@ import { icons, images } from "@/constants";
 import { ReactNativeModal } from "react-native-modal";
 import CustomInput from "@/components/CustomInput";
 import { fetchAPI } from "@/lib/fetch";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUpScreen = () => {
   const [formData, setFormData] = useState({
@@ -101,137 +104,155 @@ const SignUpScreen = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-login_main ">
-      <View className="flex-1 justify-between px-16 py-20">
-        <View className="mb-24">
-          <Text className="font-bold text-heading leading-[3.7rem] text-text_primary">
-            Welcome Back
-          </Text>
-          <Text className="text-subheading ml-1 text-text_primary">
-            Achieve your fitness alongside your friends
-          </Text>
-        </View>
+    <SafeAreaView className="flex-1 bg-login_main justify-between px-16 py-20">
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: "space-between",
+          }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <View className="mb-16">
+            <Text className="font-bold text-heading leading-[3.7rem] text-text_primary">
+              Welcome Back
+            </Text>
+            <Text className="text-subheading ml-1 text-text_primary">
+              Achieve your fitness alongside your friends
+            </Text>
+          </View>
 
-        <View className="flex-1 justify-between">
-          <View className="gap-3">
-            <View className="flex-row gap-3">
-              <TextInput
-                className="bg-input_background placeholder:text-input_placeholder text-text_primary rounded-lg p-5  flex-1"
-                placeholder="FirstName"
-                onChangeText={(changed) =>
-                  setFormData({ ...formData, firstName: changed })
-                }
-                value={formData.firstName}
-              ></TextInput>
-              <TextInput
-                className="bg-input_background placeholder:text-input_placeholder text-text_primary rounded-lg p-5  flex-1"
-                placeholder="LastName"
-                onChangeText={(changed) =>
-                  setFormData({ ...formData, lastName: changed })
-                }
-                value={formData.lastName}
-              ></TextInput>
+          <View className="flex-grow">
+            <KeyboardAvoidingView
+              style={{ flex: 1 }}
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+            >
+              <View className="gap-3">
+                <View className="flex-row gap-3">
+                  <TextInput
+                    className="bg-input_background placeholder:text-input_placeholder text-text_primary rounded-lg p-5  flex-1"
+                    placeholder="FirstName"
+                    onChangeText={(changed) =>
+                      setFormData({ ...formData, firstName: changed })
+                    }
+                    value={formData.firstName}
+                  ></TextInput>
+                  <TextInput
+                    className="bg-input_background placeholder:text-input_placeholder text-text_primary rounded-lg p-5  flex-1"
+                    placeholder="LastName"
+                    onChangeText={(changed) =>
+                      setFormData({ ...formData, lastName: changed })
+                    }
+                    value={formData.lastName}
+                  ></TextInput>
+                </View>
+
+                <TextInput
+                  className="bg-input_background placeholder:text-input_placeholder text-text_primary rounded-lg p-5 "
+                  placeholder="Email"
+                  onChangeText={(changed) =>
+                    setFormData({ ...formData, email: changed })
+                  }
+                  value={formData.email}
+                ></TextInput>
+                <TextInput
+                  className="bg-input_background placeholder:text-input_placeholder text-text_primary rounded-lg p-5 "
+                  placeholder="Passwords"
+                  onChangeText={(changed) =>
+                    setFormData({ ...formData, password: changed })
+                  }
+                  secureTextEntry={true}
+                  value={formData.password}
+                ></TextInput>
+              </View>
+            </KeyboardAvoidingView>
+            <View className="gap-3">
+              <CustomButton
+                title="Sign Up"
+                className="bg-button_primary rounded-xl py-4 shadow-none"
+                onPress={handleSignUp}
+              />
+              {/* OAuth Button */}
+              <OAuth />
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  router.replace("/(auth)/sign_in");
+                }}
+              >
+                <View className="flex-row justify-center">
+                  <Text className="text-center text-text_primary mr-3">
+                    Already have an Account?
+                  </Text>
+                  <Text className="text-center text-button_primary">
+                    Login In
+                  </Text>
+                </View>
+              </TouchableWithoutFeedback>
             </View>
 
-            <TextInput
-              className="bg-input_background placeholder:text-input_placeholder text-text_primary rounded-lg p-5 "
-              placeholder="Email"
-              onChangeText={(changed) =>
-                setFormData({ ...formData, email: changed })
-              }
-              value={formData.email}
-            ></TextInput>
-            <TextInput
-              className="bg-input_background placeholder:text-input_placeholder text-text_primary rounded-lg p-5 "
-              placeholder="Passwords"
-              onChangeText={(changed) =>
-                setFormData({ ...formData, password: changed })
-              }
-              value={formData.password}
-            ></TextInput>
-          </View>
-          <View className="gap-3">
-            <CustomButton
-              title="Sign Up"
-              className="bg-button_primary rounded-xl py-4 shadow-none"
-              onPress={handleSignUp}
-            />
-            {/* OAuth Button */}
-            <OAuth />
-            <TouchableWithoutFeedback
-              onPress={() => {
-                router.replace("/(auth)/sign_in");
+            {/* Verification Modal */}
+            <ReactNativeModal
+              isVisible={verification.state === "pending"}
+              onModalHide={() => {
+                if (verification.state === "success") setShowSuccessModal(true);
               }}
             >
-              <View className="flex-row justify-center">
-                <Text className="text-center text-text_primary mr-3">
-                  Already have an Account?
+              <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
+                <Text className="text-2xl text-center">Verification</Text>
+                <Text className="text-base text-gray-400 text-center">
+                  We've sent a verification code to your email!{formData.email}
                 </Text>
-                <Text className="text-center text-button_primary">
-                  Login In
-                </Text>
+                <CustomInput
+                  label="Code"
+                  icon={icons.lock}
+                  placeholder="Enter code here"
+                  labelStyle="mt-6"
+                  value={verification.code}
+                  keyboardType="numeric"
+                  onChangeText={(code) =>
+                    setVerification({ ...verification, code })
+                  }
+                />
+                {verification.error && (
+                  <Text className="text-red-500 text-sm mt-1">
+                    Invalid Verification Code
+                  </Text>
+                )}
+                <CustomButton
+                  title="Verify Email"
+                  className="mt-5 bg-green-600 rounded-2xl "
+                  onPress={onPressVerify}
+                />
               </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </View>
+            </ReactNativeModal>
 
-        {/* Verification Modal */}
-        <ReactNativeModal
-          isVisible={verification.state === "pending"}
-          onModalHide={() => {
-            if (verification.state === "success") setShowSuccessModal(true);
-          }}
-        >
-          <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
-            <Text className="text-2xl text-center">Verification</Text>
-            <Text className="text-base text-gray-400 text-center">
-              We've sent a verification code to your email!{formData.email}
-            </Text>
-            <CustomInput
-              label="Code"
-              icon={icons.lock}
-              placeholder="Enter code here"
-              labelStyle="mt-6"
-              value={verification.code}
-              keyboardType="numeric"
-              onChangeText={(code) =>
-                setVerification({ ...verification, code })
-              }
-            />
-            {verification.error && (
-              <Text className="text-red-500 text-sm mt-1">
-                Invalid Verification Code
-              </Text>
-            )}
-            <CustomButton
-              title="Verify Email"
-              className="mt-5 bg-green-600 rounded-2xl "
-              onPress={onPressVerify}
-            />
+            <ReactNativeModal isVisible={showSuccessModal}>
+              <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
+                <Image
+                  source={images.check}
+                  className="w-[110px] h-[110px] mx-auto my-5"
+                />
+                <Text className="text-2xl text-center">Verified</Text>
+                <Text className="text-base text-gray-400 text-center">
+                  You have successfully verified your account
+                </Text>
+                <CustomButton
+                  title="Go Home"
+                  className="mt-5 bg-button_primary rounded-2xl "
+                  onPress={() => {
+                    setShowSuccessModal(false);
+                    router.push("/(root)/(tabs)/tracker");
+                  }}
+                />
+              </View>
+            </ReactNativeModal>
           </View>
-        </ReactNativeModal>
-
-        <ReactNativeModal isVisible={showSuccessModal}>
-          <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
-            <Image
-              source={images.check}
-              className="w-[110px] h-[110px] mx-auto my-5"
-            />
-            <Text className="text-2xl text-center">Verified</Text>
-            <Text className="text-base text-gray-400 text-center">
-              You have successfully verified your account
-            </Text>
-            <CustomButton
-              title="Go Home"
-              className="mt-5 bg-button_primary rounded-2xl "
-              onPress={() => {
-                setShowSuccessModal(false);
-                router.push("/(root)/(tabs)/tracker");
-              }}
-            />
-          </View>
-        </ReactNativeModal>
-      </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
