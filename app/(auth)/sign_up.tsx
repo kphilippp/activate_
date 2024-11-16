@@ -23,6 +23,7 @@ import { fetchAPI } from "@/lib/fetch";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUpScreen = () => {
+  // this is our form data object stores all info
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -30,15 +31,24 @@ const SignUpScreen = () => {
     password: "",
   });
 
+  // these are just variables provided by Clerk, see documentation
   const { isLoaded, signUp, setActive } = useSignUp();
+
+  // veritication is used for on press sign up
+  // when waiting for verification code, we set state to pending
+  // this conditionallity renders the verification modal later
+  // we can also store the verification code inside this object
+  // we can also store any error associated with verification here
   const [verification, setVerification] = useState({
     state: "default",
     error: "",
     code: "",
   });
 
+  // This is used to show to success Modal following
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  // This is what happens when press Sign Up
   const handleSignUp = async () => {
     if (!isLoaded) {
       return;
