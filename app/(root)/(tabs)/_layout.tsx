@@ -42,6 +42,7 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: "#333333",
           borderRadius: 50,
+          borderTopWidth: 0,
           paddingBottom: 0, // ios only
           overflow: "hidden",
           marginHorizontal: 20,

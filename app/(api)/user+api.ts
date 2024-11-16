@@ -19,6 +19,8 @@ export async function POST(request: Request) {
     });
   }
 
+  // Add input validation to prevent SQLi
+
   console.log("Trying SQL Query\n");
   try {
     // SQL Query

@@ -4,6 +4,7 @@ const Layout = () => {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="(hidden)" options={{ headerShown: false }} />
     </Stack>
   );
 };

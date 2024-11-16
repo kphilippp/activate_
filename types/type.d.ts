@@ -61,7 +61,8 @@ declare interface ButtonProps extends TouchableOpacityProps {
     | "danger"
     | "outline"
     | "success"
-    | "white";
+    | "white"
+    | "dark";
   textVariant?:
     | "primary"
     | "default"
@@ -70,6 +71,7 @@ declare interface ButtonProps extends TouchableOpacityProps {
     | "success"
     | "editprofile"
     | "white";
+
   IconLeft?: React.ComponentType<any>;
   IconRight?: React.ComponentType<any>;
   className?: string;

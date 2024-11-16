@@ -15,7 +15,7 @@ export default function CalorieCirclesScreen() {
         Your Circles
       </Text>
       <ScrollView className="mt-4 flex-col">
-        <SingleGroupComponent />
+        <SingleGroupComponent nameOfGroup="Kevin's Friends" />
       </ScrollView>
     </SafeAreaView>
   );

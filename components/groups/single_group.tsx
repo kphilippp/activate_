@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const SingleGroupComponent = () => {
+const SingleGroupComponent = ({ nameOfGroup }: { nameOfGroup: string }) => {
   return (
-    <View className="bg-app_secondary">
-      <Text>SingleGroupComponent</Text>
+    <View className="bg-app_secondary rounded-lg p-5">
+      <Text className="text-white">{nameOfGroup}</Text>
     </View>
   );
 };
