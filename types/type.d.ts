@@ -68,6 +68,7 @@ declare interface ButtonProps extends TouchableOpacityProps {
     | "secondary"
     | "danger"
     | "success"
+    | "editprofile"
     | "white";
   IconLeft?: React.ComponentType<any>;
   IconRight?: React.ComponentType<any>;

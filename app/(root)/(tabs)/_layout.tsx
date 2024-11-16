@@ -1,7 +1,7 @@
 import { icons } from "@/constants";
 import { Tabs } from "expo-router";
 import React from "react";
-import { View, ImageSourcePropType, Image } from "react-native";
+import { View, ImageSourcePropType, Image, ScrollView } from "react-native";
 
 const TabBarIcon = ({
   focused,

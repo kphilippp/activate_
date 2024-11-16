@@ -91,8 +91,8 @@ const CalendarWidget = () => {
                     onPress={() => handleDateSelected(day, dayIndex, weekIndex)}
                   >
                     <View
-                      className={`bg-${
-                        activeDate === day ? "app_secondary" : "app_main"
+                      className={`${
+                        activeDate === day ? "bg-nav_active" : "bg-nav_inactive"
                       } flex-col justify-center items-center rounded-lg mx-1 px-6`}
                     >
                       <Text className="text-white text-sm w-fit">

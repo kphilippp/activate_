@@ -5,12 +5,12 @@ import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
 import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function TabTwoScreen() {
+export default function TrackerScreen() {
   const { user } = useUser();
   return (
     <SafeAreaView className="flex-1 items-center px-7 pt-6 bg-app_main">
-      <SignedIn>
-        <ScrollView>
+      <ScrollView>
+        <SignedIn>
           <CalendarWidget />
           <DailyStatsComponent />
           <MealTimesComponent mealTime="Breakfast" />
@@ -18,12 +18,12 @@ export default function TabTwoScreen() {
           <MealTimesComponent mealTime="Dinner" />
           <MealTimesComponent mealTime="Snacks" />
           <MealTimesComponent mealTime="Water" />
-        </ScrollView>
-      </SignedIn>
+        </SignedIn>
 
-      <SignedOut>
-        <Text>Not Signed In</Text>
-      </SignedOut>
+        <SignedOut>
+          <Text>Not Signed In</Text>
+        </SignedOut>
+      </ScrollView>
     </SafeAreaView>
   );
 }

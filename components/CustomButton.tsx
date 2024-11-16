@@ -11,6 +11,8 @@ const getTextVariantStyle = (variant: ButtonProps["textVariant"]) => {
       return "text-red-100";
     case "success":
       return "text-green-100";
+    case "editprofile":
+      return "text-sm text-white";
     default:
       return "text-white";
   }

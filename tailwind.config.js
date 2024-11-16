@@ -9,6 +9,7 @@ module.exports = {
       fontSize: {
         heading: "4rem",
         subheading: "2rem",
+        caption2: "[1.2rem]",
         caption: "1rem",
       },
       colors: {
@@ -24,8 +25,8 @@ module.exports = {
         swiperInactive: "#FFFFFF",
         input_background: "#565656",
         input_placeholder: "#FFFFFF",
-        navbar_icon: "#FFF",
-        navbarActive: "#0360FF",
+        nav_inactive: "#212121",
+        nav_active: "#565656",
       },
     },
   },
