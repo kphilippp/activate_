@@ -14,6 +14,7 @@ import CustomInput from "@/components/CustomInput";
 import FoodItemComponent from "@/components/add_food/food_component";
 import CustomButton from "@/components/CustomButton";
 import { icons } from "@/constants";
+import FoodScreenButton from "@/components/add_food/food_screen_button";
 
 const AddFoodScreen = () => {
   const [activePage, setActivePage] = useState("recents");
@@ -41,11 +42,21 @@ const AddFoodScreen = () => {
         </View>
 
         {/* Page Buttons */}
-        <View className="flex-row w-full">
-          <Button
+        <View className="flex-row w-full gap-3 mb-4">
+          <FoodScreenButton
             title="Recents"
-            color="#fff"
             onPress={() => onPressPageButton("recents")}
+            isActive={activePage === "recents"}
+          />
+          <FoodScreenButton
+            title="Search"
+            onPress={() => onPressPageButton("search")}
+            isActive={activePage === "search"}
+          />
+          <FoodScreenButton
+            title="My Foods"
+            onPress={() => onPressPageButton("my_foods")}
+            isActive={activePage === "my_foods"}
           />
         </View>
 
@@ -54,6 +65,13 @@ const AddFoodScreen = () => {
           <View className="gap-3">
             <FoodItemComponent />
             <FoodItemComponent />
+            <FoodItemComponent />
+          </View>
+        )}
+        {activePage === "search" && (
+          <View className="gap-3">
+            <FoodItemComponent />
+
             <FoodItemComponent />
           </View>
         )}
@@ -68,6 +86,7 @@ const AddFoodScreen = () => {
         <CustomInput
           placeholder="Search Foods"
           inputStyle="bg-input_background"
+          onPress={() => setActivePage("search")}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
