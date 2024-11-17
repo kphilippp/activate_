@@ -62,6 +62,7 @@ declare interface ButtonProps extends TouchableOpacityProps {
     | "outline"
     | "success"
     | "white"
+    | "backButton"
     | "dark";
   textVariant?:
     | "primary"
@@ -70,6 +71,7 @@ declare interface ButtonProps extends TouchableOpacityProps {
     | "danger"
     | "success"
     | "editprofile"
+    | "backButton"
     | "white";
 
   IconLeft?: React.ComponentType<any>;

@@ -13,6 +13,8 @@ const getTextVariantStyle = (variant: ButtonProps["textVariant"]) => {
       return "text-green-100";
     case "editprofile":
       return "text-sm text-white";
+    case "backButton":
+      return "";
     default:
       return "text-white";
   }
@@ -31,6 +33,8 @@ const getBgVariantStyle = (variant: ButtonProps["bgVariant"]) => {
       return "bg-white";
     case "dark":
       return "bg-app_main";
+    case "backButton":
+      return "bg-none shadow-none w-fit";
     default:
       return "bg-[#0286FF]";
   }
@@ -49,7 +53,7 @@ const CustomButton = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={`w-full rounded-full p-3 flex flex-row justify-center items-center shadow-md shadow-neutral-400/70 ${getBgVariantStyle(
+      className={`rounded-full p-3 flex flex-row justify-center items-center shadow-md shadow-neutral-400/70 ${getBgVariantStyle(
         bgVariant
       )} ${className}`}
       {...props}
