@@ -7,7 +7,7 @@ import {
   ScrollView,
   Button,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomInput from "@/components/CustomInput";
@@ -54,6 +54,15 @@ const AddFoodScreen = () => {
     }
   };
 
+  // This calls handleSearch only when user finished typing
+  useEffect(() => {
+    const delayFoodFetching = setTimeout(() => {
+      handleSearch();
+    }, 500);
+
+    return () => clearTimeout(delayFoodFetching);
+  }, [searchQuery]);
+
   return (
     <SafeAreaView className="relative h-screen bg-app_main px-9">
       {/* Header */}
@@ -89,8 +98,9 @@ const AddFoodScreen = () => {
           isActive={activePage === "my_foods"}
         />
       </View>
+
+      {/* Pages */}
       <ScrollView className="bg-app_main flex-1">
-        {/* Pages */}
         {activePage === "recents" && <View className="gap-3"></View>}
         {activePage === "search" && (
           <View className="gap-3">
@@ -122,7 +132,6 @@ const AddFoodScreen = () => {
           inputStyle="bg-input_background"
           onPress={() => setActivePage("search")}
           onChangeText={setSearchQuery}
-          onSubmitEditing={handleSearch}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
