@@ -71,6 +71,7 @@ const SignUpScreen = () => {
     }
   };
 
+  // This is what happens when press Verify, this step happens after handle SignUp
   const onPressVerify = async () => {
     if (!isLoaded) {
       return;

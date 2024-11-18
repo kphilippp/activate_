@@ -32,7 +32,7 @@ module.exports = {
         input_background: "#565656",
         input_placeholder: "#FFFFFF",
 
-        nav_inactive: "#212121",
+        nav_inactive: "#181818",
         nav_active: "#565656",
       },
     },
