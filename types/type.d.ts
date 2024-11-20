@@ -106,51 +106,19 @@ declare interface InputFieldProps extends TextInputProps {
   className?: string;
 }
 
-declare interface PaymentProps {
-  fullName: string;
-  email: string;
-  amount: string;
-  driverId: number;
-  rideTime: number;
+declare interface FoodItem {
+  foodName: string;
+  brandName?: string; // Optional, since common foods may not have it
+  calories?: number | string; // Optional, since not all foods may have calorie info
+  servingQty?: number; // Optional, since not all foods may have serving quantity
+  servingUnit?: string; // Optional, since not all foods may have serving unit
+  photoUrl?: string | null; // Thumbnail URL
 }
-
-declare interface LocationStore {
-  userLatitude: number | null;
-  userLongitude: number | null;
-  userAddress: string | null;
-  destinationLatitude: number | null;
-  destinationLongitude: number | null;
-  destinationAddress: string | null;
-  setUserLocation: ({
-    latitude,
-    longitude,
-    address,
-  }: {
-    latitude: number;
-    longitude: number;
-    address: string;
-  }) => void;
-  setDestinationLocation: ({
-    latitude,
-    longitude,
-    address,
-  }: {
-    latitude: number;
-    longitude: number;
-    address: string;
-  }) => void;
-}
-
-declare interface DriverStore {
-  drivers: MarkerData[];
-  selectedDriver: number | null;
-  setSelectedDriver: (driverId: number) => void;
-  setDrivers: (drivers: MarkerData[]) => void;
-  clearSelectedDriver: () => void;
-}
-
-declare interface DriverCardProps {
-  item: MarkerData;
-  selected: number;
-  setSelected: () => void;
+declare interface ReceivedFoodItem {
+  food_name: string;
+  brand_name?: string; // Optional, since common foods may not have it
+  nf_calories?: number | string; // Optional, since not all foods may have calorie info
+  serving_qty?: number; // Optional, since not all foods may have serving quantity
+  serving_unit?: string; // Optional, since not all foods may have serving unit
+  photo?: { thumb: string | null }; // Thumbnail URL
 }

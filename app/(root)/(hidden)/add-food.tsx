@@ -15,11 +15,12 @@ import FoodItemComponent from "@/components/add_food/food_component";
 import CustomButton from "@/components/CustomButton";
 import { icons } from "@/constants";
 import FoodScreenButton from "@/components/add_food/food_screen_button";
+import { FoodItem, ReceivedFoodItem } from "@/types/type";
 
 const AddFoodScreen = () => {
   const [activePage, setActivePage] = useState("recents");
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<ReceivedFoodItem[]>([]);
   const [loadingSearches, setLoadingSearches] = useState(false);
 
   // This switches what data is actually being shows
@@ -127,7 +128,7 @@ const AddFoodScreen = () => {
   useEffect(() => {
     const delayFoodFetching = setTimeout(() => {
       handleSearch();
-    }, 500);
+    }, 1500);
 
     return () => clearTimeout(delayFoodFetching);
   }, [searchQuery]);
