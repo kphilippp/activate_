@@ -10,6 +10,7 @@ const FoodItemComponent = ({
   servingQty,
   servingUnit,
   photoUrl,
+  nixItemID,
 }: FoodItem) => {
   return (
     <TouchableOpacity
@@ -17,12 +18,7 @@ const FoodItemComponent = ({
         router.push({
           pathname: "/(root)/(hidden)/single-food-item",
           params: {
-            foodName: foodName,
-            brandName: brandName,
-            calories: calories,
-            servingQty: servingQty,
-            servingUnit: servingUnit,
-            photoUrl: photoUrl,
+            nixItemID: nixItemID,
           },
         });
       }}

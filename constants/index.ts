@@ -70,3 +70,8 @@ export const icons = {
   target,
   to,
 };
+
+export const NUTRITIONIX_CONFIG = {
+  appID: process.env.EXPO_PUBLIC_NUTRIX_APP_ID as string,
+  appKey: process.env.EXPO_PUBLIC_NUTRIX_APP_KEY as string,
+};

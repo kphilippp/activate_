@@ -120,14 +120,16 @@ const AddFoodScreen = () => {
       console.log(results);
       setLoadingSearches(false);
     } catch (error) {
-      console.log("We caught an error");
+      console.log("We caught an error :", error);
     }
   };
 
-  // This calls handleSearch only when user finished typing
+  // search DeBouncing
   useEffect(() => {
     const delayFoodFetching = setTimeout(() => {
-      handleSearch();
+      if (searchQuery.length > 3) {
+        handleSearch();
+      }
     }, 1500);
 
     return () => clearTimeout(delayFoodFetching);
@@ -145,9 +147,7 @@ const AddFoodScreen = () => {
           onPress={() => router.back()}
           bgVariant="backButton"
         />
-        <Text className="text-white text-subheading font-bold">
-          Recently Eaten Foods
-        </Text>
+        <Text className="text-white text-subheading font-bold">Add Foods</Text>
       </View>
 
       {/* Page Buttons */}
@@ -189,6 +189,7 @@ const AddFoodScreen = () => {
                   servingQty={foodItem.serving_qty || 1}
                   servingUnit={foodItem.serving_unit || "unit"}
                   photoUrl={foodItem.photo?.thumb || null}
+                  nixItemID={foodItem?.nix_item_id || null}
                 />
               ))}
           </View>

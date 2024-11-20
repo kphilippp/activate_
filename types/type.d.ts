@@ -113,6 +113,7 @@ declare interface FoodItem {
   servingQty?: number; // Optional, since not all foods may have serving quantity
   servingUnit?: string; // Optional, since not all foods may have serving unit
   photoUrl?: string | null; // Thumbnail URL
+  nixItemID?: string | null;
 }
 declare interface ReceivedFoodItem {
   food_name: string;
@@ -121,4 +122,24 @@ declare interface ReceivedFoodItem {
   serving_qty?: number; // Optional, since not all foods may have serving quantity
   serving_unit?: string; // Optional, since not all foods may have serving unit
   photo?: { thumb: string | null }; // Thumbnail URL
+  nix_item_id?: string | null;
+}
+
+interface NutritionData {
+  food_name: string;
+  brand_name?: string; // Optional
+  serving_qty: number;
+  serving_unit: string;
+  serving_weight_grams?: number; // Optional
+  nf_calories?: number; // Optional
+  nf_total_fat?: number; // Optional
+  nf_saturated_fat?: number; // Optional
+  nf_total_carbohydrate?: number; // Optional
+  nf_sugars?: number; // Optional
+  nf_protein?: number; // Optional
+  nf_sodium?: number; // Optional
+  nf_dietary_fiber?: number; // Optional
+  nf_cholesterol?: number; // Optional
+  nf_ingredient_statement?: string; // Optional
+  photo?: { thumb: string | null }; // Optional
 }
