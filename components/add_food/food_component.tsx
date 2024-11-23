@@ -19,6 +19,8 @@ const FoodItemComponent = ({
           pathname: "/(root)/(hidden)/single-food-item",
           params: {
             nixItemID: nixItemID,
+            foodName: foodName,
+            photoURL: photoUrl,
           },
         });
       }}

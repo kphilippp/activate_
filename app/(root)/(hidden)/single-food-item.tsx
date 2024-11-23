@@ -11,8 +11,12 @@ const SingleFoodItemPage = () => {
   // Extract search params
   const {
     nixItemID,
+    foodName,
+    photoURL,
   }: {
     nixItemID: string;
+    foodName: string;
+    photoURL: string;
   } = useLocalSearchParams();
 
   const [nutrition, setNutrition] = useState<NutritionData>();
@@ -149,60 +153,109 @@ const SingleFoodItemPage = () => {
         <View className="h-screen p-11 bg-app_secondary rounded-[2rem]">
           <View className="flex-row gap-5">
             {/* Display Food Image */}
-            {nutrition?.photo ? (
+            {photoURL ? (
               <Image
-                source={{ uri: nutrition?.photo }}
-                className="w-32 h-32 rounded-3xl mb-5"
+                source={{ uri: photoURL }}
+                className="w-20 h-20 rounded-xl mb-5"
                 resizeMode="cover"
               />
             ) : (
-              <View className="w-24 h-24 bg-gray-400 rounded-full mb-5 justify-center items-center">
+              <View className="w-32 h-32 bg-gray-400 rounded-full mb-5 justify-center items-center">
                 <Text className="text-gray-600">No Image</Text>
               </View>
             )}
-          </View>
-
-          {nutrition ? (
             <View>
-              <Text className="text-gray-300 text-sm mb-1">
-                Serving: {nutrition.serving_qty} {nutrition.serving_unit} (
-                {nutrition.serving_weight_grams} g)
+              <Text className="text-white font-bold text-2xl">
+                {nutrition?.food_name}
               </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Calories: {nutrition.nf_calories || "N/A"} kcal
+              <Text className="text-white text-lh">
+                {nutrition?.brand_name}
               </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Total Fat: {nutrition.nf_total_fat || "N/A"} g
+            </View>
+          </View>
+          ;
+          {nutrition ? (
+            <View className="bg-gray-800 rounded-lg p-6 shadow-lg">
+              <Text className="text-gray-300 text-xl font-bold mb-4">
+                Nutrition Facts
               </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Saturated Fat: {nutrition.nf_saturated_fat || "N/A"} g
-              </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Carbohydrates: {nutrition.nf_total_carbohydrate || "N/A"} g
-              </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Sugars: {nutrition.nf_sugars || "N/A"} g
-              </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Protein: {nutrition.nf_protein || "N/A"} g
-              </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Sodium: {nutrition.nf_sodium || "N/A"} mg
-              </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Cholesterol: {nutrition.nf_cholesterol || "N/A"} mg
-              </Text>
-              <Text className="text-gray-300 text-sm mb-1">
-                Dietary Fiber: {nutrition.nf_dietary_fiber || "N/A"} g
-              </Text>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">Serving</Text>
+                <Text className="text-gray-300">
+                  {nutrition.serving_qty} {nutrition.serving_unit} (
+                  {nutrition.serving_weight_grams} g)
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">Calories</Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_calories || "N/A"} kcal
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">Total Fat</Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_total_fat || "N/A"} g
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">
+                  Saturated Fat
+                </Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_saturated_fat || "N/A"} g
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">
+                  Carbohydrates
+                </Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_total_carbohydrate || "N/A"} g
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">Sugars</Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_sugars || "N/A"} g
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">Protein</Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_protein || "N/A"} g
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">Sodium</Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_sodium || "N/A"} mg
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">Cholesterol</Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_cholesterol || "N/A"} mg
+                </Text>
+              </View>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-gray-300 font-semibold">
+                  Dietary Fiber
+                </Text>
+                <Text className="text-gray-300">
+                  {nutrition.nf_dietary_fiber || "N/A"} g
+                </Text>
+              </View>
               {nutrition.nf_ingredient_statement && (
-                <Text className="text-gray-300 text-sm italic">
+                <Text className="text-gray-400 text-sm italic mt-4">
                   Ingredients: {nutrition.nf_ingredient_statement}
                 </Text>
               )}
             </View>
           ) : (
-            <Text className="text-white">No Nutrition Data Available</Text>
+            <Text className="text-white text-center mt-6">
+              No Nutrition Data Available
+            </Text>
           )}
         </View>
       </ScrollView>
