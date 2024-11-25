@@ -175,18 +175,46 @@ const SingleFoodItemPage = () => {
           </View>
           ;
           {nutrition ? (
-            <View className="bg-gray-800 rounded-lg p-6 shadow-lg">
-              <Text className="text-gray-300 text-xl font-bold mb-4">
+            <View className="bg-app_quart rounded-xl p-7 mt-3">
+              <Text className="text-gray-300 text-xl font-extrabold mb-4">
                 Nutrition Facts
               </Text>
-              <View className="flex-row justify-between mb-2">
+              <View className="flex-row justify-between">
+                <Text className="text-white">Amount</Text>
+                <Text className="text-white">100 Millileters</Text>
+              </View>
+              <View className="flex-row justify-between mt-7">
+                <View className="flex-1">
+                  <Text className="text-center text-white font-extrabold text-6xl">
+                    697
+                  </Text>
+                  <Text className="text-center text-white text-sm">
+                    Calories
+                  </Text>
+                </View>
+                <View className="flex-1 flex-col ml-4 gap-1">
+                  <View className="flex-row">
+                    <Text className="text-white min-w-12 font-bold">105g</Text>
+                    <Text className="text-white text-left">Carbs</Text>
+                  </View>
+                  <View className="flex-row">
+                    <Text className="text-white min-w-12 font-bold">15g</Text>
+                    <Text className="text-white text-left">Fats</Text>
+                  </View>
+                  <View className="flex-row">
+                    <Text className="text-white min-w-12 font-bold">5g</Text>
+                    <Text className="text-white text-left">Proteins</Text>
+                  </View>
+                </View>
+              </View>
+              {/* <View className="flex-row justify-between mb-2">
                 <Text className="text-gray-300 font-semibold">Serving</Text>
                 <Text className="text-gray-300">
                   {nutrition.serving_qty} {nutrition.serving_unit} (
                   {nutrition.serving_weight_grams} g)
                 </Text>
-              </View>
-              <View className="flex-row justify-between mb-2">
+              </View> */}
+              {/* <View className="flex-row justify-between mb-2">
                 <Text className="text-gray-300 font-semibold">Calories</Text>
                 <Text className="text-gray-300">
                   {nutrition.nf_calories || "N/A"} kcal
@@ -219,8 +247,8 @@ const SingleFoodItemPage = () => {
                 <Text className="text-gray-300">
                   {nutrition.nf_sugars || "N/A"} g
                 </Text>
-              </View>
-              <View className="flex-row justify-between mb-2">
+              </View> */}
+              {/* <View className="flex-row justify-between mb-2">
                 <Text className="text-gray-300 font-semibold">Protein</Text>
                 <Text className="text-gray-300">
                   {nutrition.nf_protein || "N/A"} g
@@ -245,12 +273,12 @@ const SingleFoodItemPage = () => {
                 <Text className="text-gray-300">
                   {nutrition.nf_dietary_fiber || "N/A"} g
                 </Text>
-              </View>
-              {nutrition.nf_ingredient_statement && (
+              </View> */}
+              {/* {nutrition.nf_ingredient_statement && (
                 <Text className="text-gray-400 text-sm italic mt-4">
                   Ingredients: {nutrition.nf_ingredient_statement}
                 </Text>
-              )}
+              )} */}
             </View>
           ) : (
             <Text className="text-white text-center mt-6">

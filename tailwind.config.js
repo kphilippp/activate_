@@ -19,6 +19,7 @@ module.exports = {
         app_main: "#1A1A1A",
         app_secondary: "#212121",
         app_ternary: "#090909",
+        app_quart: "#2D2D2D",
 
         text_primary: "#FFFFFF",
         text_secondary: "#000",

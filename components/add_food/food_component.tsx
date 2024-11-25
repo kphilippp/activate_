@@ -25,7 +25,7 @@ const FoodItemComponent = ({
         });
       }}
     >
-      <View className="w-full bg-app_secondary p-3 pl-4 flex-row rounded-xl gap-4 items-center">
+      <View className="w-full bg-app_secondary p-3 pl-4 flex-row rounded-xl gap-4 items-center mb-1">
         {/* Render the image if available */}
         {photoUrl ? (
           <Image

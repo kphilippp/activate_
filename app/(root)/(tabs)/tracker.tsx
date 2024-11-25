@@ -7,8 +7,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TrackerScreen() {
   return (
-    <SafeAreaView className="relative h-screen items-center px-7 pt-6 bg-app_main">
-      <ScrollView className="relative h-full w-full ">
+    <View className="relative h-screen w-full items-center px-7 pt-20 bg-app_main">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        className="relative h-full w-full "
+      >
         <SignedIn>
           <View className="gap-4 h-screen">
             <DailyStatsComponent />
@@ -23,7 +26,6 @@ export default function TrackerScreen() {
           <Text>Not Signed In</Text>
         </SignedOut>
       </ScrollView>
-      <CalendarWidget />
-    </SafeAreaView>
+    </View>
   );
 }

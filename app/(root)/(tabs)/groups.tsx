@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function CalorieCirclesScreen() {
   return (
     <SafeAreaView
-      className="bg-app_main flex-1 px-10 pt-6
+      className="bg-app_main flex-1 px-10 pt-6 w-full
   "
     >
       <Text className="text-white text-heading font-bold text-left">

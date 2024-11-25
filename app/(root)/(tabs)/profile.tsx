@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
   return (
-    <SafeAreaView className="bg-app_main flex-1 justify-start align-middle p-7">
+    <SafeAreaView className="bg-app_main flex-1 justify-start align-middle p-7 w-full">
       <View className="gap-5">
         <View className="bg-app_secondary rounded-xl p-9 flex-row">
           <View className="bg-white rounded-full aspect-square h-28 flex-[0.4]"></View>

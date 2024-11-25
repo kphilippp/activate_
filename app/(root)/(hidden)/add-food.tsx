@@ -6,6 +6,7 @@ import {
   Platform,
   ScrollView,
   Button,
+  FlatList,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { router } from "expo-router";
@@ -170,31 +171,33 @@ const AddFoodScreen = () => {
       </View>
 
       {/* Pages */}
-      <ScrollView className="bg-app_main flex-1">
-        {activePage === "recents" && <View className="gap-3"></View>}
-        {activePage === "search" && (
-          <View className="gap-3">
-            {loadingSearches && <Text className="text-white">Loading...</Text>}
-            {!loadingSearches && searchResults.length === 0 && (
+
+      {activePage === "recents" && <View className="gap-3"></View>}
+      {activePage === "search" && (
+        <FlatList
+          data={searchResults}
+          keyExtractor={(item, index) => item?.nix_item_id || index.toString()}
+          renderItem={({ item }) => (
+            <FoodItemComponent
+              foodName={item.food_name}
+              brandName={item.brand_name || "Common Food"}
+              calories={item.nf_calories || "N/A"}
+              servingQty={item.serving_qty || 1}
+              servingUnit={item.serving_unit || "unit"}
+              photoUrl={item.photo?.thumb || null}
+              nixItemID={item?.nix_item_id || null}
+            />
+          )}
+          ListEmptyComponent={
+            !loadingSearches && (
               <Text className="text-white">No Results Found</Text>
-            )}
-            {!loadingSearches &&
-              searchResults.length !== 0 &&
-              searchResults.map((foodItem, index) => (
-                <FoodItemComponent
-                  key={index}
-                  foodName={foodItem.food_name}
-                  brandName={foodItem.brand_name || "Common Food"}
-                  calories={foodItem.nf_calories || "N/A"}
-                  servingQty={foodItem.serving_qty || 1}
-                  servingUnit={foodItem.serving_unit || "unit"}
-                  photoUrl={foodItem.photo?.thumb || null}
-                  nixItemID={foodItem?.nix_item_id || null}
-                />
-              ))}
-          </View>
-        )}
-      </ScrollView>
+            )
+          }
+          ListFooterComponent={
+            loadingSearches && <Text className="text-white">Loading...</Text>
+          }
+        />
+      )}
 
       {/* Search Bar */}
       <KeyboardAvoidingView

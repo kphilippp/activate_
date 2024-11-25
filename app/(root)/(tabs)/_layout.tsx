@@ -1,89 +1,41 @@
-import { icons } from "@/constants";
-import { Tabs } from "expo-router";
 import React from "react";
-import { View, ImageSourcePropType, Image, ScrollView } from "react-native";
+import { Dimensions, View, Text } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
+import CalorieCirclesScreen from "./groups";
+import ProfileScreen from "./profile";
+import TrackerScreen from "./tracker";
 
-const TabBarIcon = ({
-  focused,
-  iconSrc,
-}: {
-  focused: boolean;
-  iconSrc: ImageSourcePropType;
-}) => (
-  <View
-    className={`flex flex-row justify-center items-center rounded-full 
-    }`}
-  >
-    <View
-      className={`rounded-full w-12 h-12 items-center justify-center ${
-        focused ? "bg-input_background" : ""
-      }`}
-    >
-      <Image
-        source={iconSrc}
-        tintColor="#FFF"
-        resizeMode="contain"
-        className="w-7 h-7"
-      />
-    </View>
-  </View>
-);
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-export default function TabLayout() {
+const TabLayout = () => {
+  const screens = [
+    { key: "groups", component: <CalorieCirclesScreen /> },
+    { key: "tracker", component: <TrackerScreen /> },
+    { key: "profile", component: <ProfileScreen /> },
+  ];
+
   return (
-    <Tabs
-      initialRouteName="tracker"
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "white",
-        tabBarShowLabel: false,
-
-        tabBarStyle: {
-          backgroundColor: "#333333",
-          borderRadius: 50,
-          borderTopWidth: 0,
-          paddingBottom: 0, // ios only
-          overflow: "hidden",
-          marginHorizontal: 20,
-          marginBottom: 20,
-          height: 78,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexDirection: "row",
-          position: "absolute",
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="groups"
-        options={{
-          title: "Groups",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon iconSrc={icons.chat} focused={focused} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="tracker"
-        options={{
-          title: "Tracker",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon iconSrc={icons.list} focused={focused} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon iconSrc={icons.profile} focused={focused} />
-          ),
-        }}
-      />
-    </Tabs>
+    <Carousel
+      width={SCREEN_WIDTH}
+      height={SCREEN_HEIGHT}
+      data={screens}
+      loop={false}
+      renderItem={({ item }) => (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
+          }}
+        >
+          {item.component}
+        </View>
+      )}
+    />
   );
-}
+};
+
+export default TabLayout;
